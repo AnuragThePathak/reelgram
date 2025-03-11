@@ -3,3 +3,8 @@ export enum REGISTER_STATUS {
 	FAILED_TO_CREATE_USER,
 	SUCCESS
 }
+
+export enum FILE_TYPES {
+	IMAGE,
+	VIDEO,
+}
