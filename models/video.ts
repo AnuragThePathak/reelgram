@@ -1,25 +1,10 @@
+import { IVideo } from "@/lib/types"
 import mongoose from "mongoose"
 
 export const VIDEO_DIMENSIONS = {
 	HEIGHT: 1080,
 	WIDTH: 1920,
 } as const
-
-export interface IVideo {
-	_id?: mongoose.Types.ObjectId
-	title: string
-	description: string
-	videoUrl: string
-	thumbnailUrl: string
-	controls?: boolean
-	transformation: {
-		height: number
-		width: number
-		quality?: number
-	}
-	createdAt?: Date
-	updatedAt?: Date
-}
 
 const videoSchema = new mongoose.Schema<IVideo>({
 	title: { type: String, required: true},

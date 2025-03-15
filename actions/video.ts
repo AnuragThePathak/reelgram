@@ -2,10 +2,11 @@
 
 import { authOptions } from "@/lib/auth"
 import { connectToDb } from "@/lib/db"
-import Video, { IVideo } from "@/models/video"
+import { INewVideo } from "@/lib/types"
+import Video from "@/models/video"
 import { getServerSession } from "next-auth"
 
-export async function createVideo(video: IVideo) {
+export async function createVideo(video: INewVideo) {
 	try {
 		const session = await getServerSession(authOptions)
 		if (!session) {
@@ -27,17 +28,18 @@ export async function createVideo(video: IVideo) {
 
 		const videoData = {
 			...video,
-			controls: video.controls ?? true,
+			controls: true,
 			transformation: {
 				height: 1920,
 				width: 1080,
-				quality: video.transformation.quality ?? 100
+				quality: 100
 			}
 		}
 
 		await connectToDb()
-		const res = await Video.create(videoData)
-		return res
+		const newVideo = await Video.create(videoData)
+		const videoId = newVideo._id.toString()
+		return { _id: videoId }
 	} catch (e) {
 		console.error("Error creating video", e)
 		return {

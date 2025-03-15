@@ -20,14 +20,12 @@ export default function FileUploader({
 	const handleError = (err: { message: string }) => {
 		setError(err.message)
 		setUploading(false)
-		console.log("Error", err)
 	}
 
 	const handleSuccess = (res: IKUploadResponse) => {
 		setUploading(false)
 		setError(null)
 		onSuccess(res)
-		console.log("Success", res)
 	}
 
 	const handleUploadProgress = (progress: ProgressEvent) => {

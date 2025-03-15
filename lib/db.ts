@@ -1,3 +1,5 @@
+"use server"
+
 import mongoose from "mongoose"
 
 let cache = global.mongoose
@@ -11,7 +13,7 @@ export async function connectToDb() {
 	}
 
 	if (!cache.promise) {
-		cache.promise = mongoose.connect(process.env.MONGODB_URI!, {
+		cache.promise = mongoose.connect(`${process.env.MONGO_URI!}/image-kit`, {
 			maxPoolSize: 10,
 		})
 		.then(() => mongoose.connection)

@@ -1,14 +1,6 @@
 import mongoose from "mongoose"
 import bcrypt from "bcryptjs"
-
-export interface IUser {
-	_id?: mongoose.Types.ObjectId
-	name: string
-	email: string
-	password: string
-	createdAt?: Date
-	updatedAt?: Date
-}
+import { IUser } from "@/lib/types"
 
 const userSchema = new mongoose.Schema<IUser>({
 	name: { type: String, required: true },
