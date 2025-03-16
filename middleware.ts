@@ -6,6 +6,11 @@ export default withAuth(
 			authorized({ req, token }) {
 				const { pathname } = req.nextUrl
 
+				// Video API routes
+				if (pathname.startsWith("/api/videos")) {
+					return true
+				}
+
 				// Allow auth-related routes
 				if (
 					// pathname.startsWith("/api/auth") ||
@@ -16,9 +21,9 @@ export default withAuth(
 				}
 
 				// Public routes
-				// if (pathname === "/" || pathname.startsWith("/api/videos")) {
-				// 	return true
-				// }
+				if (pathname === "/" || pathname.startsWith("/videos")) {
+					return true
+				}
 				// All other routes require authentication
 				return !!token
 			}
